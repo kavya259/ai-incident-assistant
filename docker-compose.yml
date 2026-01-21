@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres:16
+    container_name: incident_db
+    environment:
+      POSTGRES_DB: incidentdb
+      POSTGRES_USER: incident_user
+      POSTGRES_PASSWORD: incident_pass
+    ports:
+      - "5433:5432"
