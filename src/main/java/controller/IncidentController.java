@@ -4,18 +4,21 @@ import com.kavya.ai_incident_assistant.entity.Incident;
 import com.kavya.ai_incident_assistant.repository.IncidentRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/incidents")
 public class IncidentController {
 
-    private final IncidentRepository repository;
+    private final IncidentRepository incidentRepository;
 
-    public IncidentController(IncidentRepository repository) {
-        this.repository = repository;
+    public IncidentController(IncidentRepository incidentRepository) {
+        this.incidentRepository = incidentRepository;
     }
 
-    @PostMapping
-    public Incident createIncident(@RequestBody Incident incident) {
-        return repository.save(incident);
+    // ✅ GET all incidents
+    @GetMapping
+    public List<Incident> getAll() {
+        return incidentRepository.findAll();
     }
 }
