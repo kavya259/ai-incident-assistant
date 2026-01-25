@@ -8,3 +8,15 @@ services:
       POSTGRES_PASSWORD: incident_pass
     ports:
       - "5433:5432"
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: incident_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
