@@ -1,5 +1,7 @@
 package com.kavya.ai_incident_assistant.entity;
 
+import com.kavya.ai_incident_assistant.model.Severity;
+import com.kavya.ai_incident_assistant.model.Status;
 import jakarta.persistence.*;
 import java.time.Instant;
 
@@ -17,11 +19,13 @@ public class Incident {
     @Column(length = 5000)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String severity; // ex: LOW, MEDIUM, HIGH, CRITICAL
+    private Severity severity; // LOW, MEDIUM, HIGH, CRITICAL
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;   // ex: OPEN, IN_PROGRESS, RESOLVED
+    private Status status; // OPEN, IN_PROGRESS, RESOLVED
 
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
@@ -35,8 +39,8 @@ public class Incident {
         this.createdAt = now;
         this.updatedAt = now;
 
-        if (this.severity == null) this.severity = "LOW";
-        if (this.status == null) this.status = "OPEN";
+        if (this.severity == null) this.severity = Severity.LOW;
+        if (this.status == null) this.status = Status.OPEN;
     }
 
     @PreUpdate
@@ -53,11 +57,11 @@ public class Incident {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) { this.severity = severity; }
+    public Severity getSeverity() { return severity; }
+    public void setSeverity(Severity severity) { this.severity = severity; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
