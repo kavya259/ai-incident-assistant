@@ -1,131 +1,196 @@
 # AI Incident Assistant
 
-A backend-focused Incident Management System built with Spring Boot and PostgreSQL.
+A backend-focused Incident Management system built using Java Spring Boot and PostgreSQL.
 
-This project demonstrates production-style backend development practices including REST APIs, validation, exception handling, pagination, filtering, Docker, and PostgreSQL integration.
+The project demonstrates production-style backend development including REST APIs, validation, exception handling, pagination, filtering, Dockerized deployment, monitoring, and PostgreSQL integration.
+
+---
+
+## Technologies
+
+- Java 17
+- Spring Boot 3
+- Spring Data JPA
+- PostgreSQL 16
+- Docker
+- Docker Compose
+- pgAdmin
+- Spring Boot Actuator
+- Swagger / OpenAPI
 
 ---
 
 ## Features
 
-- Create new incidents
-- Retrieve incidents
-- Retrieve incident by ID
+- Create incidents
+- View incidents
 - Update incident status
-- Filter incidents by status
-- Filter incidents by severity
+- Filter by status
+- Filter by severity
 - Pagination support
-- Request validation
 - Global exception handling
-- Swagger/OpenAPI documentation
+- Request validation
 - PostgreSQL persistence
+- Swagger API documentation
 - Dockerized deployment
-- pgAdmin integration
+- Health monitoring using Spring Boot Actuator
 
 ---
 
-## Tech Stack
-
-- Java 17
-- Spring Boot 3.x
-- Spring Data JPA
-- Hibernate
-- PostgreSQL 16
-- Docker
-- Docker Compose
-- pgAdmin
-- Maven
-- Swagger / OpenAPI
-
----
-
-## Architecture
+## Project Structure
 
 ```
 Client
-   │
-   ▼
+      │
+      ▼
 Spring Boot REST API
-   │
-   ▼
-Service Layer
-   │
-   ▼
-JPA / Hibernate
-   │
-   ▼
+      │
+      ▼
+Spring Data JPA
+      │
+      ▼
 PostgreSQL
+      │
+      ▼
+Docker
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | /health | Health Check |
+| POST | /api/incidents | Create Incident |
+| GET | /api/incidents | List Incidents |
+| GET | /api/incidents/{id} | Get Incident |
+| PUT | /api/incidents/{id}/status | Update Status |
+| GET | /actuator/health | Application Health |
+
+---
+
+## Filtering
+
+```
+GET /api/incidents?status=OPEN
+```
+
+```
+GET /api/incidents?severity=HIGH
+```
+
+---
+
+## Pagination
+
+```
+GET /api/incidents?page=0&size=5
+```
+
+---
+
+## Running the Project
+
+### Start PostgreSQL
+
+```bash
+docker compose up -d
+```
+
+---
+
+### Build Project
+
+```bash
+./mvnw clean package
+```
+
+---
+
+### Start Application
+
+```bash
+docker compose up --build
+```
+
+---
+
+## Swagger
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+## Actuator
+
+```
+http://localhost:8080/actuator/health
 ```
 
 ---
 
 ## Database
 
-Table:
+PostgreSQL is containerized using Docker Compose.
+
+Database:
 
 ```
-incidents
+incidentdb
 ```
 
-Columns
+pgAdmin:
 
-| Column | Type |
-|---------|------|
-| id | bigint |
-| title | varchar |
-| description | varchar |
-| severity | varchar |
-| status | varchar |
-| created_at | timestamptz |
-| updated_at | timestamptz |
+```
+http://localhost:5050
+```
+
+---
+## Screenshots
+
+### Swagger UI
+
+![Swagger UI](screenshots/swagger-ui.png)
 
 ---
 
-## Running the Project
+### Application Health (Spring Boot Actuator)
 
-### Clone
-
-```bash
-git clone https://github.com/kavya259/ai-incident-assistant.git
-cd ai-incident-assistant
-```
-
-### Start PostgreSQL & pgAdmin
-
-```bash
-docker compose up -d
-```
-
-Services
-
-- Spring Boot: http://localhost:8080
-- Swagger UI: http://localhost:8080/swagger-ui/index.html
-- OpenAPI Docs: http://localhost:8080/v3/api-docs
-- PostgreSQL: localhost:5433
-- pgAdmin: http://localhost:5050
+![Actuator Health](screenshots/actuator-health.png)
 
 ---
 
-## API Endpoints
+### PostgreSQL Database (pgAdmin)
 
-| Method | Endpoint |
-|---------|----------|
-| POST | /api/incidents |
-| GET | /api/incidents |
-| GET | /api/incidents/{id} |
-| PUT | /api/incidents/{id}/status |
+![pgAdmin](screenshots/pgadmin.png)
 
 ---
 
-## Status
+### Docker Containers
 
-Current implementation includes:
+![Docker Containers](screenshots/docker-containers.png)
+## Future Enhancements
 
-- REST APIs
-- PostgreSQL integration
-- Docker support
-- Swagger documentation
-- Validation
-- Global exception handling
-- Pagination
-- Filtering
+- JWT Authentication
+- Role-Based Access Control
+- AI-powered Incident Resolution Assistant
+- Prometheus & Grafana Monitoring
+- CI/CD with GitHub Actions
+- Cloud Deployment (AWS/Azure)
+
+---
+
+## Author
+
+Kavya Saraboju
+
+## Academic Supervision
+
+This project was developed as part of my Volunteer Research Assistant work in the Department of Computer Science at Southern Illinois University Edwardsville.
+
+Academic Supervisor:
+
+Professor Dr Mark McKenney
