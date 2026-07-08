@@ -1,138 +1,131 @@
-\# AI Incident Assistant
+# AI Incident Assistant
 
+A backend-focused Incident Management System built with Spring Boot and PostgreSQL.
 
-
-A backend-focused Spring Boot application for tracking and managing system incidents.
-
-Built with production-style practices: REST APIs, PostgreSQL, Docker, and version control.
-
-
+This project demonstrates production-style backend development practices including REST APIs, validation, exception handling, pagination, filtering, Docker, and PostgreSQL integration.
 
 ---
 
+## Features
 
-
-\## Tech Stack
-
-\- Java 17
-
-\- Spring Boot 3.x
-
-\- Spring Data JPA
-
-\- PostgreSQL 16
-
-\- Docker \& Docker Compose
-
-\- pgAdmin (DB UI)
-
-
+- Create new incidents
+- Retrieve incidents
+- Retrieve incident by ID
+- Update incident status
+- Filter incidents by status
+- Filter incidents by severity
+- Pagination support
+- Request validation
+- Global exception handling
+- Swagger/OpenAPI documentation
+- PostgreSQL persistence
+- Dockerized deployment
+- pgAdmin integration
 
 ---
 
+## Tech Stack
 
+- Java 17
+- Spring Boot 3.x
+- Spring Data JPA
+- Hibernate
+- PostgreSQL 16
+- Docker
+- Docker Compose
+- pgAdmin
+- Maven
+- Swagger / OpenAPI
 
-\## Architecture (Current)
+---
 
+## Architecture
 
-
-Client (API calls)
-
-↓
-
+```
+Client
+   │
+   ▼
 Spring Boot REST API
-
-↓
-
+   │
+   ▼
+Service Layer
+   │
+   ▼
 JPA / Hibernate
-
-↓
-
-PostgreSQL (Docker)
-
-
-
-
-
-
-
-
+   │
+   ▼
+PostgreSQL
+```
 
 ---
 
+## Database
 
+Table:
 
-\## Current Features
+```
+incidents
+```
 
-\- Health check endpoint (`/health`)
-
-\- Incident persistence using JPA
-
-\- PostgreSQL running in Docker
-
-\- pgAdmin UI to inspect data
-
-\- Table auto-created via Hibernate
-
-\- GitHub versioned development
-
-
-
----
-
-
-
-\## Database Schema
-
-\*\*Table:\*\* `incidents`
-
-
+Columns
 
 | Column | Type |
-
-|------|------|
-
-| id | bigint (PK) |
-
+|---------|------|
+| id | bigint |
 | title | varchar |
-
 | description | varchar |
-
 | severity | varchar |
-
 | status | varchar |
-
-| created\_at | timestamptz |
-
-| updated\_at | timestamptz |
-
-
+| created_at | timestamptz |
+| updated_at | timestamptz |
 
 ---
 
+## Running the Project
 
-
-\## Running the Project
-
-
-
-\### 1. Start Database \& pgAdmin
+### Clone
 
 ```bash
+git clone https://github.com/kavya259/ai-incident-assistant.git
+cd ai-incident-assistant
+```
 
+### Start PostgreSQL & pgAdmin
+
+```bash
 docker compose up -d
+```
 
+Services
 
+- Spring Boot: http://localhost:8080
+- Swagger UI: http://localhost:8080/swagger-ui/index.html
+- OpenAPI Docs: http://localhost:8080/v3/api-docs
+- PostgreSQL: localhost:5433
+- pgAdmin: http://localhost:5050
 
-PostgreSQL → port 5433
+---
 
+## API Endpoints
 
+| Method | Endpoint |
+|---------|----------|
+| POST | /api/incidents |
+| GET | /api/incidents |
+| GET | /api/incidents/{id} |
+| PUT | /api/incidents/{id}/status |
 
-pgAdmin → http://localhost:5050
+---
 
+## Status
 
+Current implementation includes:
 
-
-
-
-
+- REST APIs
+- PostgreSQL integration
+- Docker support
+- Swagger documentation
+- Validation
+- Global exception handling
+- Pagination
+- Filtering
