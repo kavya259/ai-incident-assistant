@@ -10,11 +10,11 @@ import lombok.Setter;
 @Setter
 public class CreateIncidentRequest {
 
-    @NotBlank
+    @NotBlank(message = "title is required")
     private String title;
 
     private String description;
 
-    private Severity severity;  // changed from String
-    private Status status;      // changed from String
+    private Severity severity;
+    private Status status;
 }

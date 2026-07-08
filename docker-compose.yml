@@ -8,6 +8,7 @@ services:
       POSTGRES_PASSWORD: incident_pass
     ports:
       - "5433:5432"
+
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: incident_pgadmin
@@ -20,3 +21,14 @@ services:
     depends_on:
       - db
 
+  app:
+    build: .
+    container_name: incident_app
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/incidentdb
+      SPRING_DATASOURCE_USERNAME: incident_user
+      SPRING_DATASOURCE_PASSWORD: incident_pass
